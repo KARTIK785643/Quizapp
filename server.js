@@ -244,40 +244,51 @@ app.delete("/api/quizzes/:id", async (req, res) => {
 });
 app.post("/api/quizzes/:quizId/submit", authMiddleware, async (req, res) => {
   try {
-    const { quizId } = req.params;
-    const { answers } = req.body;
-    const userId = req.userId;
+      const { quizId } = req.params;
+      const { answers } = req.body;
+      const userId = req.userId;
 
-    const quiz = await Quiz.findById(quizId);
-    if (!quiz) return res.status(404).json({ message: "Quiz not found" });
-
-    let score = 0;
-    quiz.questions.forEach((q, index) => {
-      if (q.correctAnswer === answers[index]) {
-        score++;
+      const quiz = await Quiz.findById(quizId);
+      if (!quiz) {
+          return res.status(404).json({ error: "Quiz not found" });
       }
-    });
 
-    // ✅ Save result in the Quiz collection (inside `results`)
-    quiz.results.push({ userId, score });
-    await quiz.save();
+      let correctCount = 0;
+      quiz.questions.forEach((q, idx) => {
+          if (String(q.correctAnswer).trim() === String(answers[idx]).trim()) {
+              correctCount++;
+          }
+      });
 
-    // ✅ Update User's correctAnswers field
-    const user = await User.findById(userId);
-    if (!user) return res.status(404).json({ message: "User not found" });
+      // ✅ Ensure CorrectAnswer is updated properly
+      const updatedUser = await User.findByIdAndUpdate(
+          userId,
+          { $inc: { correctAnswer: correctCount } },
+          { new: true }  // ✅ Ensures updated value is returned
+      );
 
-    user.correctAnswers += score; // Track total correct answers
-    await user.save();
+      await Quiz.findByIdAndUpdate(
+          quizId,
+          { $push: { results: { userId: userId, score: correctCount } } }
+      );
 
-    // ✅ Emit leaderboard update
-    io.emit("leaderboardUpdated");
+      // ✅ Delay to Ensure DB update is reflected
+      setTimeout(async () => {
+          const updatedLeaderboard = await User.find()
+              .sort({ correctAnswer: -1 })
+              .select("username correctAnswer");
 
-    res.json({ message: "Quiz submitted successfully", score });
+          io.emit("leaderboardUpdated", updatedLeaderboard);
+      }, 500); // ✅ 500ms delay
+
+      res.status(200).json({ message: "Quiz submitted!", correctAnswers: correctCount });
   } catch (error) {
-    console.error("Error submitting quiz:", error);
-    res.status(500).json({ message: "Server error" });
+      console.error("Error submitting quiz:", error);
+      res.status(500).json({ error: "Internal server error" });
   }
-}); 
+});
+
+
 
 
 
@@ -328,18 +339,42 @@ app.post("/submit-quiz", async (req, res) => {
   }
 });
 
-app.get("/leaderboard", async (req, res) => {
+app.get("/api/leaderboard", async (req, res) => {
   try {
-      const leaderboard = await User.find({}, "username correctAnswer")
-          .sort({ correctAnswer: -1 })  // Sort by highest correct answers
-          .limit(10);  // Limit top 10 users
+    // Fetch users sorted by correctAnswer in descending order
+    const users = await User.find()
+      .sort({ correctAnswer: -1 }) // Highest score first
+      .select("username correctAnswer");
 
-      res.json(leaderboard);
+    let rank = 1;
+    let previousScore = null;
+    let sameRankCount = 0;
+
+    // Assign ranks
+    const leaderboard = users.map((user, index) => {
+      if (user.correctAnswer === previousScore) {
+        sameRankCount++;
+      } else {
+        rank += sameRankCount; // Adjust for same rank users
+        sameRankCount = 1; // Reset for new rank count
+      }
+
+      previousScore = user.correctAnswer;
+
+      return {
+        rank, // Assigned Rank
+        username: user.username,
+      };
+    });
+
+    console.log("Leaderboard with ranks:", leaderboard);
+    res.status(200).json(leaderboard);
   } catch (error) {
-      console.error("Error fetching leaderboard:", error);
-      res.status(500).json({ error: "Server error" });
+    console.error("Error fetching leaderboard:", error);
+    res.status(500).json({ error: "Internal Server Error" });
   }
 });
+
 
 app.get("/api/health", (req, res) => {
     res.json({ status: "ok" });
