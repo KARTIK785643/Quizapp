@@ -1,0 +1,67 @@
+/* General container */
+
+
+.ranking-container {
+    width: 70%;
+    margin: 50px auto;
+    padding: 20px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  /* Table styling */
+  .ranking-table {
+    width: 100%;
+    border-collapse: collapse; /* ✅ Fix spacing issues */
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  /* Table header */
+  .ranking-table thead {
+    background: #4CAF50;
+    color: white;
+    width: 100%;  /* ✅ Ensure it takes full width */
+  }
+  
+  /* Header and row cell styling */
+  .ranking-table th, .ranking-table td {
+    padding: 12px 15px;
+    text-align: center;
+    border: 1px solid #ddd;
+  }
+  
+  /* Highlight top ranks */
+  .top-1 {
+    background: rgb(224, 219, 192) !important;
+    font-weight: bold;
+    color: black;
+  }
+  
+  .top-2 {
+    background: silver !important;
+    font-weight: bold;
+    color: black;
+  }
+  
+  .top-3 {
+    background: #cd7f32 !important; /* Bronze */
+    font-weight: bold;
+    color: white;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .ranking-container {
+        width: 90%;
+        padding: 15px;
+    }
+  
+    .ranking-table th, .ranking-table td {
+        padding: 10px;
+        font-size: 14px;
+    }
+  }
+  

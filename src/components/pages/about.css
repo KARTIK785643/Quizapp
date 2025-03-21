@@ -1,0 +1,100 @@
+/* Import Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+/* Main container */
+.about-container {
+    width: 100%;
+    padding: 40px;
+    height: 100vh;
+    background: rgba(255, 255, 255, 0.95);
+    text-align: center;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Title */
+.about-title {
+    color: #2c7873;
+    font-size: 28px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 15px;
+}
+
+/* Description */
+.about-description {
+    font-size: 18px;
+    line-height: 1.8;
+    color: #444;
+    font-weight: 400;
+    margin-bottom: 15px;
+}
+
+/* Features title */
+.features-title {
+    font-size: 24px;
+    font-weight: 600;
+    color: #2c7873;
+    margin-top: 20px;
+}
+
+/* Features list */
+.features-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+}
+
+/* Individual feature item */
+.feature-item {
+    font-size: 16px;
+    margin: 10px 0;
+    color: #666;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.feature-item::before {
+    content: "✔";
+    color: #2c7873;
+    font-size: 18px;
+    margin-right: 10px;
+}
+
+/* How it works title */
+.how-it-works-title {
+    font-size: 24px;
+    font-weight: 600;
+    color: #2c7873;
+    margin-top: 30px;
+}
+
+/* How it works description */
+.how-it-works-description {
+    font-size: 18px;
+    line-height: 1.8;
+    color: #444;
+    font-weight: 400;
+    margin-top: 15px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .about-container {
+        width: 95%;
+        padding: 30px;
+    }
+    .about-title,
+    .features-title,
+    .how-it-works-title {
+        font-size: 22px;
+    }
+    .about-description,
+    .how-it-works-description {
+        font-size: 16px;
+    }
+}

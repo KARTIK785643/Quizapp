@@ -1,0 +1,75 @@
+/* Global Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Ensure full height without scrolling */
+html, body {
+  height: 80%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Navbar styling */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #3e9b99;
+  padding: 16px 32px;
+  position: sticky;
+  top: 0;
+  box-shadow: 0px 4px 8px rgba(140, 137, 137, 0.5);
+  z-index: 1000;
+}
+
+.logo {
+  color: rgb(250, 255, 252);
+  font-size: 28px;
+  font-weight: bold;
+  font-family: cursive;
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 60px;
+}
+
+.nav-links li {
+  margin: 0;
+}
+
+.nav-item {
+  color: rgb(255, 255, 255);
+  text-decoration: none;
+  font-size: 20px;
+  cursor: pointer;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  transition: color 0.3s, transform 0.2s;
+}
+
+.nav-item:hover {
+  color: #ffeb3b;
+  transform: scale(1.05);
+}
+
+/* --- Make the body take full height --- */
+
+
+/* --- Main content container --- */
+
+  /* Footer */
+  .footer {
+    width: 100%;
+    padding: 15px 0;
+    background-color: #3e9b99;
+    color: white;
+    text-align: center;
+    font-size: 1rem;
+    margin-top: 50px;
+  }
+  

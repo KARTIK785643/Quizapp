@@ -1,0 +1,200 @@
+/* Profile Container */
+
+.profileContainer {
+    width: 90%;
+    max-width: 450px;
+    margin: 60px auto;
+    padding: 30px;
+    text-align: center;
+    background: #edfcfc;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    border-radius: 20px;
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .profileContainer:hover {
+    transform: scale(1.02);
+  }
+  
+  /* Profile Image Section */
+  .profileImageSection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .profileImageContainer {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #f5f5f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .profileImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .profileImagePlaceholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #e0e0e0;
+    color: #195dd2;
+    font-size: 64px;
+    font-weight: bold;
+    border-radius: 50%;
+  }
+  
+  /* Image Upload Controls */
+  .imageUploadControls {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+  }
+  
+  .uploadButton,
+  .saveImageButton {
+    padding: 8px 16px;
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  .uploadButton:hover {
+    background-color: #357abd;
+  }
+  
+  .saveImageButton {
+    background-color: #4caf50;
+  }
+  
+  .saveImageButton:hover {
+    background-color: #3d8b40;
+  }
+  
+  /* Profile Info */
+  .profileTitle {
+    font-size: 22px;
+    color: #146e5f;
+    margin-bottom: 10px;
+  }
+  
+  .profileInfo {
+    text-align: left;
+    margin-top: 10px;
+  }
+  
+  .profileField {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .fieldLabel {
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .fieldValue {
+    color: #555;
+  }
+  
+  /* Stats Section */
+  .statsSection {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    margin-top: 20px;
+  }
+  
+  .statCard {
+    flex: 1;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .statCard h2 {
+    font-size: 22px;
+    color: #146e5f;
+    margin-bottom: 5px;
+  }
+  
+  .statCard p {
+    font-size: 14px;
+    color: #666;
+  }
+  
+  /* Achievements Section */
+  .achievementsSection {
+    margin-top: 30px;
+    text-align: center;
+  }
+  
+  .achievementsSection h3 {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+  }
+  
+  .achievementsList {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  
+  .achievementBadge {
+    padding: 8px 12px;
+    background: #0c6262;
+    color: white;
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: bold;
+    transition: background 0.3s ease-in-out;
+  }
+  
+  .achievementBadge:hover {
+    background: #0056b3;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .profileContainer {
+      width: 95%;
+      padding: 20px;
+    }
+  
+    .statsSection {
+      flex-direction: column;
+      gap: 10px;
+    }
+  
+    .achievementBadge {
+      padding: 6px 10px;
+      font-size: 12px;
+    }
+  }
+  
